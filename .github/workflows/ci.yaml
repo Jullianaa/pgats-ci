@@ -1,4 +1,4 @@
-name: Pipeline Completa
+name: Pipeline da ju
 
 # Permissões necessárias para a workflow
 permissions:
@@ -34,9 +34,9 @@ jobs:
   # Job principal para testes
   test:
     # Nome descritivo exibido na interface
-    name: Testes Node.js
+    name: calculosTrabalhistas.test.js
     # Sistema operacional do runner (ambiente de execução)
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     # Tempo máximo para o job completar (em minutos)
     timeout-minutes: 11
 
