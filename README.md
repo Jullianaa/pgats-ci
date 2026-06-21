@@ -41,3 +41,36 @@
 💜⚡️
 
 # pgats-ci
+# Pipeline CI – Serviço de Pagamento
+
+## Objetivo
+
+Implementar uma pipeline de Integração Contínua utilizando GitHub Actions para execução automatizada dos testes do projeto Serviço de Pagamento.
+
+## Tecnologias
+
+- Node.js
+- Mocha
+- GitHub Actions
+- mocha-junit-reporter
+
+## Funcionalidades da Pipeline
+
+### Execução automática por push
+
+A pipeline é disparada automaticamente quando ocorre push nas branches principais.
+
+### Execução manual
+
+Pode ser executada pela interface do GitHub através do botão "Run workflow".
+
+### Execução agendada
+
+Executa semanalmente utilizando expressão cron.
+
+### Relatórios de testes
+
+Os resultados dos testes são gerados no formato JUnit XML.
+
+Arquivo gerado:
+
