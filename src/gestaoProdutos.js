@@ -1,4 +1,4 @@
-onst produtos = [
+const produtos = [
     {
         nome: 'Trackinas',
         preco: 1.49,
@@ -17,13 +17,10 @@ onst produtos = [
     }
 ];
 
-// Atualização de nome
 produtos[2].nome = 'MacBook Pro M5';
 
 /**
- * Retorna o nome do produto pelo índice
  * @param {number} indice
- * @returns {string | undefined}
  */
 export function pegarNomeDoProduto(indice) {
     return produtos[indice]?.nome;
