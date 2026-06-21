@@ -1,21 +1,9 @@
-name: Pipeline CI - Cálculos Trabalhistas
-
-permissions:
-  contents: read
+name: Pipeline CI - Testes Mocha
 
 on:
-  # Execução automática ao realizar push
   push:
-    branches:
-      - main
-      - master
-
-  # Execução manual pela interface do GitHub
+    branches: [main, master]
   workflow_dispatch:
-
-  # Execução agendada: toda segunda-feira às 03:00 UTC
-  schedule:
-    - cron: '0 3 * * 1'
 
 jobs:
   testes:
@@ -23,35 +11,27 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
+          cache: 'npm'
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm install
 
-      - name: Criar diretório de relatórios
-        run: mkdir -p reports
+      - name: Rodar testes
+        run: npm test
 
-      - name: Executar testes automatizados
-        run: npm run test:report
-
-      - name: Publicar relatório de testes
+      - name: Publicar relatório de testes (JUnit)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: relatorio-testes
-          path: reports/test-results.xml
-
-      - name: Exibir resumo dos testes
-        if: always()
-        run: |
-          echo "Pipeline executada com sucesso."
-          echo "Consulte o artefato relatorio-testes para visualizar o relatório XML."
+          name: relatorio-testes-node-${{ matrix.node-version }}
+          path: reports/junit.xml
