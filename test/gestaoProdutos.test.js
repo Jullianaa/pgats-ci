@@ -1,4 +1,4 @@
-import {pegarNomeDoProduto} from '../src/gestaoProdutosJu.js';
+import {pegarNomeDoProduto} from '../src/gestaoProdutos.js';
 import assert from 'node:assert';
 
 describe('testes gestao produto', function(){
