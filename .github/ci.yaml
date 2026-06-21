@@ -1,16 +1,29 @@
-name: Pipeline CI Simples
+name: Pipeline CI - Cálculos Trabalhistas
+
+permissions:
+  contents: read
 
 on:
+  # Execução automática ao realizar push
   push:
     branches:
       - main
+      - master
 
+  # Execução manual pela interface do GitHub
   workflow_dispatch:
 
+  # Execução agendada: toda segunda-feira às 03:00 UTC
+  schedule:
+    - cron: '0 3 * * 1'
+
 jobs:
-  test:
-    name: Testes Node.js
+  testes:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
       - name: Checkout do código
@@ -19,11 +32,26 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: ${{ matrix.node-version }}
           cache: npm
 
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
 
-      - name: Executar testes
-        run: npm test
+      - name: Criar diretório de relatórios
+        run: mkdir -p reports
+
+      - name: Executar testes automatizados
+        run: npm run test:report
+
+      - name: Publicar relatório de testes
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-testes
+          path: reports/test-results.xml
+
+      - name: Exibir resumo dos testes
+        if: always()
+        run: |
+          echo "Pipeline executada com sucesso."
+          echo "Consulte o artefato relatorio-testes para visualizar o relatório XML."
