@@ -186,7 +186,7 @@ jobs:
       - name: Aguardar geração dos arquivos
 
         # Espera 10 segundos para garantir que os arquivos foram gerados
-        run: sleep 10
+        run: sleep 10 
 
       # Salva os relatórios gerados no repositório
       - name: Commit dos relatórios
