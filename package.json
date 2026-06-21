@@ -2,10 +2,10 @@
   "name": "robo-coasters-example",
   "version": "1.0.0",
   "type": "module",
-    "scripts": {
-    "test": "mocha",
-    "test:report": "mocha test/**/*.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/test-results.xml"
-  },
+  "scripts": {
+  "test": "mocha",
+  "test:report": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=reports/test-results.xml"
+},
   "devDependencies": {
     "mocha": "^11.0.0",
     "mocha-junit-reporter": "^2.2.1"
