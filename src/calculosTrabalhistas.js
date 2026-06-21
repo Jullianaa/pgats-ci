@@ -1,20 +1,32 @@
-export function adicionarBonusPorSenioridade(salario, senioridade){
+class ServicoDePagamentoBancario {
 
-    if(senioridade == 'junior'){
-        return salario + 50;
-    }else if (senioridade == 'pleno'){
-        return salario +100;
-    }else if (senioridade == 'senior'){
-        return salario +1000;
+  constructor() {
+    this.pagamentos = [];
+  }
+
+  pagar(codigoBarras, empresa, valor) {
+
+    const categoria = valor > 100 ? 'cara' : 'padrão';
+
+    const pagamento = {
+      codigoBarras,
+      empresa,
+      valor,
+      categoria
+    };
+
+    this.pagamentos.push(pagamento);
+    return 'Pagamento realizado com sucesso.';
+  }
+
+  consultarUltimoPagamento() {
+
+    if (this.pagamentos.length === 0) {
+      return 'Nenhum pagamento efetuado.';
     }
-   
-} 
 
-export function calcularValorDeVendaDeDiasDeFerias(salarioMensal,diasAVender){
-    if(diasAVender < 1 || diasAVender > 30){
-        throw new Error('Dias devem estar entre 1 e 30.');
-    }
-
-    const salarioDiario =  salarioMensal/30;
-    return salarioDiario * diasAVender;
+    return this.pagamentos[this.pagamentos.length - 1];
+  }
 }
+
+export default ServicoDePagamentoBancario;
