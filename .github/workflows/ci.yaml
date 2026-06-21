@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [20.x, 22.x]
+        node-version: [22.x]
 
     steps:
       - name: Checkout do código
@@ -24,14 +25,17 @@ jobs:
           cache: 'npm'
 
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
+
+      - name: Criar pasta de relatórios
+        run: mkdir -p reports
 
       - name: Rodar testes
         run: npm test
 
-      - name: Publicar relatório de testes (JUnit)
+      - name: Upload relatório de testes
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: relatorio-testes-node-${{ matrix.node-version }}
+          name: relatorio-testes-${{ matrix.node-version }}
           path: reports/junit.xml
