@@ -1,29 +1,30 @@
-
-const produtos = [
+onst produtos = [
     {
         nome: 'Trackinas',
-        preco: '1.49',
+        preco: 1.49,
         estoque: 50
     },
     {
         nome: 'ps4',
-        preco: '3999.99',
-        estooque: 25  
+        preco: 3999.99,
+        estoque: 25  
     },
     {
         nome: 'MacBook',
-        preco: '21490.00',
+        preco: 21490.00,
         estoque: 5,
-        cores: ['cinza espacial','cinza']  
+        cores: ['cinza espacial', 'cinza']  
     }
 ];
 
-//console.log(produtos[2].cores[1])
-//console.log(produtos[2].nome)
+// Atualização de nome
 produtos[2].nome = 'MacBook Pro M5';
-//console.log(produtos[2].nome)
 
-
-export function pegarNomeDoProduto(indice){
-    return produtos[indice].nome
+/**
+ * Retorna o nome do produto pelo índice
+ * @param {number} indice
+ * @returns {string | undefined}
+ */
+export function pegarNomeDoProduto(indice) {
+    return produtos[indice]?.nome;
 }
